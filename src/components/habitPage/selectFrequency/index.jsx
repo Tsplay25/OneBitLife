@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
     },
     dropdownItemStyle: {
       borderWidth: 1,
-      borderColor: "#BBB",
+      borderColor: "#BBBB",
       borderRadius: 10,
       marginBottom: 15,
     },
     dropdownTextStyle: {
-      color: "#BBB",
+      color: "#BBBBBB",
     },
     arrow: {
       width: 20,
