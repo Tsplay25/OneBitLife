@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import AppExplanation from "../pages/appExplanation"
 import HabitPage from '../pages/habitPage'
 import Home from '../pages/home'
+import Start from '../pages/start'
 
 const Stack = createNativeStackNavigator();
 

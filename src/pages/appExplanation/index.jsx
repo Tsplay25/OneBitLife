@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { View, Text, ScrollView, StyleSheet, handleSetShowHome, handleNavHome } from "react-native";
 import DefaultButton from "../../components/common/defaultButton";
 import ExplanationCard from "../../components/explanation/explanationCard";
-import ChangeNavigationService from "../../services/changeNavigationService";
+import changeNavigationService from "../../services/changeNavigationService";
 
 export default function AppExplanation() {
 
@@ -19,14 +19,14 @@ export default function AppExplanation() {
     }
 
     function handleSetShowHome() {
-        if(showHome !== "true") {
-            ChangeNavigationService.setShowHome({ showHome: "true", appStartData })
-            .then(() => console.log(`Sucesso! ${showHome} ${appStartData}`))
-            .catch((err) => console.log(err));
-            setShowHome("true");      
-            handleNavHome();  
+        if (showHome !== "true") {
+            changeNavigationService.setShowHome({ showHome: "true", appStartData })
+                .then(() => console.log(`Sucesso! ${showHome} ${appStartData}`))
+                .catch((err) => console.log(err));
+            setShowHome("true");
+            handleNavHome();
         }
-    }
+      }
 
     return(
         <View style={styles.container}>
