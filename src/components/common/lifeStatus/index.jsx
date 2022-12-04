@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 
 import Lottie from "lottie-react-native";
+import AnimationService from "../../../services/animationService";
 
-export default function LifeStatus() {
+export default function LifeStatus({
+    mindHabit,
+    moneyHabit,
+    bodyHabit,
+    funHabit,
+}) {
     /* Status:
         100 - maximo
         50 - medio
@@ -12,34 +18,35 @@ export default function LifeStatus() {
         no robo, nos temos primeiro felicidade e depois a saude xx-xx 
     */
 
+    const [mind, setMind] = useState();
+    const [money, setMoney] = useState();
+    const [robot, setRobot] = useState();
+
+    useEffect(() => {
+        AnimationService.animationStatus(
+            mindHabit?.progressBar,
+            moneyHabit?.progressBar,
+            bodyHabit?.progressBar,
+            funHabit?.progressBar,
+            setMind,
+            setMoney,
+            setRobot,
+        );
+    }, [mindHabit, moneyHabit, bodyHabit, funHabit]);
+
+
     return (
         <View style={styles.container}>
-            <Lottie
-                source = {require("../../../assets/education/education-100.json")}
-                autoPlay
-                loop
-                style={styles.educacaoAnimacao}
-            />
-            <Lottie
-                source = {require("../../../assets/money/money-100.json")}
-                autoPlay
-                loop
-                style={styles.financasAnimacao}
-            />
-            <Lottie
-                source = {require("../../../assets/robot/robot-100-100.json")}
-                autoPlay
-                loop
-                style={styles.roboAnimacao}
-            />
-
+            <Lottie source={mind} autoPlay loop style={styles.educacaoAnimacao} />
+            <Lottie source={money} autoPlay loop style={styles.financasAnimacao} />
+            <Lottie source={robot} autoPlay loop style={styles.roboAnimacao} />
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        width:300,
+        width: 300,
         height: 300,
     },
     roboAnimacao: {
