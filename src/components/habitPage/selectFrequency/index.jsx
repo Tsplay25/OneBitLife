@@ -24,7 +24,6 @@ export default function SelectFrequency({ habitFrequency, frequencyInput }) {
         search={false}
         setSelected={setSelected}
         onSelect={() => {
-          alert(selected);
           frequencyInput(selected);
         }}
         placeholder={selected}
