@@ -74,10 +74,26 @@ const updateHabit = (obj) => {
             );
         });
     });
-  };
+};
+
+const deleteByName = (habitArea) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                "DELETE FROM habits WHERE habitArea=?;",
+                [habitArea],
+                (_, { rowsAffected }) => {
+                    resolve(rowsAffected);
+                },
+                (_, error) => reject(error)
+            );
+        });
+    });
+};
 
 export default {
     createHabit,
     findByArea,
     updateHabit,
+    deleteByName,
 }

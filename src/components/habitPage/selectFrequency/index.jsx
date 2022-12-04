@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Image, View ,StyleSheet, Alert } from "react-native";
+import { Image, View ,StyleSheet } from "react-native";
 import { SelectList } from "react-native-dropdown-select-list";
 
 export default function SelectFrequency({ habitFrequency, frequencyInput }) {

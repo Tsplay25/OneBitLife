@@ -1,61 +1,60 @@
+import DateTimePicker from "@react-native-community/datetimepicker";
 import React, { useState } from 'react'
 import { View, StyleSheet, TouchableOpacity, Text, Image } from 'react-native'
 import { SelectList } from 'react-native-dropdown-select-list';
-import DateTimePicker from "@react-native-community/datetimepicker";
 
 export default function TimeDataPicker({
-    frequency,
-    dayNotification,
-    timeNotification,
-    setDayNotification,
-    setTimeNotification,
-  }) {
-    const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState("date");
-    const [show, setShow] = useState(false);
-    const [selected, setSelected] = useState("-");
-    const [notificationDate, setNotificationDate] = useState();
-    const [notificationTime, setNotificationTime] = useState();
-  
-    const onChange = (_, selectDate) => {
-      const currentDate = selectDate || date;
-      setShow(Platform.OS === "ios");
-      setDate(currentDate);
-      let tempDate = new Date(currentDate);
-      const notficationHour = tempDate.getHours().toString().padStart(2, "0");
-      const notficationMin = tempDate.getMinutes().toString().padStart(2, "0");
-      let dateNotification;
-  
-      if (frequency === "Semanal") {
-        dateNotification = selected;
-      }
-      const timeNotification = `${notficationHour}:${notficationMin}`;
-  
-      setNotificationDate(dateNotification);
-      setNotificationTime(timeNotification);
-  
-      if (frequency === "Diário") {
-        setDayNotification("Diário");
-      } else {
-        setNotificationDate(dateNotification);
-      }
-      setTimeNotification(timeNotification);
-    };
-    const showMode = (currentMode) => {
-      setShow(true);
-      setMode(currentMode);
-    };
-  
-    const data = [
-      { key: "Domingo", value: "Dom" },
-      { key: "Segunda", value: "Seg" },
-      { key: "Terça", value: "Ter" },
-      { key: "Quarta", value: "Qua" },
-      { key: "Quinta", value: "Qui" },
-      { key: "Sexta", value: "Sex" },
-      { key: "Sábado", value: "Sab" },
-    ];
-  
+  frequency,
+  dayNotification,
+  timeNotification,
+  setDayNotification,
+  setTimeNotification,
+}) {
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
+  const [selected, setSelected] = useState("-");
+  const [notificationDate, setNotificationDate] = useState();
+  const [notificationTime, setNotificationTime] = useState();
+
+  const onChange = (_, selectDate) => {
+    const currentDate = selectDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+    let tempDate = new Date(currentDate);
+    const notficationHour = tempDate.getHours().toString().padStart(2, "0");
+    const notficationMin = tempDate.getMinutes().toString().padStart(2, "0");
+    let dateNotification;
+
+    if (frequency === "Semanal") {
+      dateNotification = selected;
+    }
+    const timeNotification = `${notficationHour}:${notficationMin}`;
+
+    setNotificationDate(dateNotification);
+    setNotificationTime(timeNotification);
+
+    if (frequency === "Diário") {
+      setDayNotification("Diário");
+    } else {
+      setDayNotification(dateNotification);
+    }
+    setTimeNotification(timeNotification);
+  };
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+
+  const data = [
+    { key: "Domingo", value: "Dom" },
+    { key: "Segunda", value: "Seg" },
+    { key: "Terça", value: "Ter" },
+    { key: "Quarta", value: "Qua" },
+    { key: "Quinta", value: "Qui" },
+    { key: "Sexta", value: "Sex" },
+    { key: "Sábado", value: "Sab" },
+  ];
     return (
       <View>
         <TouchableOpacity style={styles.button} onPress={() => showMode("time")}>
