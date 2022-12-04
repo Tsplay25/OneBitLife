@@ -115,7 +115,7 @@ export default function TimeDataPicker({
 const styles = StyleSheet.create({
     button: {
         borderWidth: 1,
-        borderColor: "white",
+        borderColor: "#FFF",
         paddingVertical: 15,
         paddingHorizontal: 20,
         borderRadius: 5,
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     buttonText: {
-        color: "white",
+        color: "#FFF",
         fontSize: 18,
         fontWeight: "bold",
     },
@@ -133,17 +133,17 @@ const styles = StyleSheet.create({
     },
     notificationText: {
         fontSize: 18,
-        color: "white",
+        color: "#FFF",
         marginTop: 20,
     },
     boxStyle: {
         borderWidth: 1,
-        borderColor: "white",
+        borderColor: "#FFF",
         paddingHorizontal: 20,
         paddingVertical: 15,
     },
     inputStyle: {
-        color: "white",
+        color: "#FFF",
     },
     dropdownStyle: {
         borderWidth: 0,
