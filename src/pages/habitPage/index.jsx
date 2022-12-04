@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef, setHabitInput } from "react";  
 import { useNavigation } from "@react-navigation/native";
+import {  View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from "react-native";
+import * as Notifications from "expo-notifications";
 
-import {  View, Text, StyleSheet, Image, TouchableOpacity, ScrollView, Alert } from "react-native"
 import SelectHabit from "../../components/habitPage/selectHabit";
 import SelectFrequency from "../../components/habitPage/selectFrequency";
 import Notification from "../../components/habitPage/notification";
@@ -9,6 +10,14 @@ import TimeDataPicker from "../../components/habitPage/timeDataPicker";
 import UpdateExcludeButtons from "../../components/habitPage/updateExcludeButtons";
 import DefaultButton from "../../components/common/defaultButton";
 import habitsService from "../../services/habitsService";
+
+Notifications.setNotificationHandler({
+    handleNotification: async() => ({
+        shouldShowAlert: true,
+        shouldPlaySound: true,
+        shouldSetBadge: false,
+    }),
+});
 
 export default function HabitPage({ route }) {
     const navigation = useNavigation();
@@ -21,6 +30,10 @@ export default function HabitPage({ route }) {
     const { create, habit } = route.params;
     const habitCreated = new Date();
     const formatDate = `${habitCreated.getFullYear()}-${habitCreated.getMonth()}-${habitCreated.getDate()}`;
+
+    const [notification, setNotification] = useState(false);
+    const notificationListener = useRef();
+    const responseListener = useRef();
 
     function handleCreateHabit() {
         if(
@@ -96,6 +109,36 @@ export default function HabitPage({ route }) {
             });
         }
     }
+
+    useEffect(() => {
+        if (habit?.habitHasNotification == 1) {
+          setNotificationToggle(true);
+          setDayNotification(habit?.habitNotificationFrequency);
+          setTimeNotification(habit?.habitNotificationTime);
+        }
+    }, []);
+
+    useEffect(() => {
+        if(notificationToggle === false){
+            setTimeNotification(null);
+            setDayNotification(null);
+        }
+    }, [notificationToggle]);
+
+    useEffect(() => {
+        notificationListener.current = Notifications.addNotificationReceivedListener((notification) => {
+            setNotification(notification);
+        });
+        responseListener.current = Notifications.addNotificationResponseReceivedListener((response) => {
+            console.log(response);
+        });
+        return () => {
+            Notifications.removeNotificationSubscription(
+                notificationListener.current
+            );
+            Notifications.removeNotificationSubscription(responseListener.current);
+        }
+    }, []);
 
     return (
         <View style={styles.container}>
