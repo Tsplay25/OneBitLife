@@ -32,15 +32,15 @@ const setShowHome = (obj) => {
 const checkShowHome = (id) => {
     return new Promise((resolve, reject) => {
         db.transaction((tx) => {
-        tx.executeSql(
-            "SELECT * FROM change_navigation where id=?;",
-            [id],
-            (_, { rows }) => {
-                if (rows.length > 0) resolve(rows._array[0]);
-                else reject("Obj not found: id=" + id);
-            },
-            (_, error) => reject(error)
-        );
+            tx.executeSql(
+                "SELECT * FROM change_navigation where id=?;",
+                [id],
+                (_, { rows }) => {
+                    if (rows.length > 0) resolve(rows._array[0]);
+                    else reject("Obj not found: id=" + id);
+                },
+                (_, error) => reject(error)
+            );
         });
     });
 };

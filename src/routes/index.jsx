@@ -6,10 +6,10 @@ import changeNavigationService from '../services/changeNavigationService';
 export default function Routes(){
     const [showHome, setShowHome] = useState("false");
     changeNavigationService.checkShowHome(1)
-        .then((showHome)=> {
+        .then((showHome) => {
             setShowHome(showHome.showHome);
         })
         .catch((err) => console.log(err));
-
-    return<>{showHome === "true" ? <HomePage/> : <AllPages/>}</> ;
+        
+    return <>{showHome === "true" ? <HomePage/> : <AllPages/>}</>;
 }
