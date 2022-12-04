@@ -1,14 +1,14 @@
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 
-import Start from "../pages/start";
-import AppExplanation from "../pages/appExplanation";
-import Home from '../pages/home';
-import HabitPage from "../pages/habitPage";
+import AppExplanation from "../pages/appExplanation"
+import HabitPage from '../pages/habitPage'
+import Home from '../pages/home'
 
 const Stack = createNativeStackNavigator();
 
-export default function AllPages(){
+export default function HomePage(){
     return(
         <NavigationContainer>
             <Stack.Navigator
