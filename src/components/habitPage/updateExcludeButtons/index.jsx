@@ -17,7 +17,7 @@ export default function UpdateExcludeButtons({
 
     return(
 
-        <View>
+        <View style={styles.container}>
             <TouchableOpacity
                 style={styles.updateButton}
                 activeOpacity={0.8}
@@ -64,7 +64,7 @@ export default function UpdateExcludeButtons({
             <Image
                 source={require("../../../assets/icons/trash.png")}
                 style={styles.trashIcon}
-                />
+            />
             </TouchableOpacity>
         </View>
     )

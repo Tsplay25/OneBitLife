@@ -6,7 +6,7 @@ export default function EditHabit ({ habit, frequency, habitArea, checkColor}) {
     const navigation = useNavigation();
 
     function handleEdit(){
-        navigation.navigate("habitPage", {
+        navigation.navigate("HabitPage", {
             create: false,
             habit,
         });

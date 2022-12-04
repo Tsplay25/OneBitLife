@@ -66,17 +66,34 @@ export default function HabitPage({ route }) {
                 });
             });
         }
-
-        function handleUpdateHabit() {
-            if(notificationToggle === true && !dayNotification && !timeNotification) {
-                Alert.alert(
-                    "Você precisa dizer a frequência e o horário da notificação!"
-                );
-            }else{
-                navigation.navigate("Home", {
-                    updatedHabit: `Updated in ${habit?.habitArea}`,
-                })
-            }
+    }
+        
+    function handleUpdateHabit() {
+        if(notificationToggle === true && !dayNotification && !timeNotification) {
+            Alert.alert(
+                "Você precisa dizer a frequência e o horário da notificação!"
+            );
+        }else{
+            habitsService.updateHabit({
+                habitArea: habit?.habitArea,
+                habitName: habitInput,
+                habitFrequency: frequencyInput,
+                habitHasNotification: notificationToggle,
+                habitNotificationFrequency: dayNotification,
+                habitNotificationTime: timeNotification,
+                habitNotificationId: notificationToggle ? habitInput : null,
+            }).then(() => {
+                Alert.alert("Hábito atualizado com sucesso!");
+                if(!notificationToggle){
+                    // delete notification
+                }else {
+                    // create notification
+                }
+            });
+            
+            navigation.navigate("Home", {
+                updatedHabit: `Updated in ${habit?.habitArea}`,
+            });
         }
     }
 
@@ -128,7 +145,7 @@ export default function HabitPage({ route }) {
                         {create === false ? (
                             <UpdateExcludeButtons
                                 handleUpdate={handleUpdateHabit}
-                                habitArea={habitArea}
+                                habitArea={habit?.habitArea}
                                 habitInput={habitInput}
                             />
                         ) : (

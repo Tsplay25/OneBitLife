@@ -39,21 +39,45 @@ const createHabit = (obj) => {
 };
   
 const findByArea = (habitArea) => {
-return new Promise((resolve, reject) => {
-    db.transaction((tx) => {
-    tx.executeSql(
-        "SELECT * FROM habits WHERE habitArea LIKE ?;",
-        [habitArea],
-        (_, { rows }) => {
-            if (rows.length > 0) resolve(rows._array);
-        },
-        (_, error) => reject(error)
-    );
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+        tx.executeSql(
+            "SELECT * FROM habits WHERE habitArea LIKE ?;",
+            [habitArea],
+            (_, { rows }) => {
+                if (rows.length > 0) resolve(rows._array);
+            },
+            (_, error) => reject(error)
+        );
+        });
     });
-});
 };
+
+const updateHabit = (obj) => {
+    return new Promise((resolve, reject) => {
+        db.transaction((tx) => {
+            tx.executeSql(
+                "UPDATE habits SET habitName=?, habitFrequency=?, habitHasNotification=?, habitNotificationFrequency=?, habitNotificationTime=? WHERE habitArea=?;",
+                [
+                    obj.habitName,
+                    obj.habitFrequency,
+                    obj.habitHasNotification,
+                    obj.habitNotificationFrequency,
+                    obj.habitNotificationTime,
+                    obj.habitArea,
+                ],
+                (_, { rowsAffected }) => {
+                    if (rowsAffected > 0) resolve(rowsAffected);
+                    else reject("Error updating obj");
+                },
+                (_, error) => reject(error)
+            );
+        });
+    });
+  };
 
 export default {
     createHabit,
     findByArea,
+    updateHabit,
 }
